@@ -13,6 +13,8 @@ const maxScoreSpan = document.getElementById("max-score");
 const resultMessage = document.getElementById("result-message");
 const restartButton = document.getElementById("restart-btn");
 const progressBar = document.getElementById("progress");
+
+
 const quizQuestions = [
   {
     question: "What is the capital of France?",
@@ -60,6 +62,7 @@ const quizQuestions = [
     ],
   },
 ];
+
 // QUIZ STATE VARS
 let currentQuestionIndex = 0;
 let score = 0;
@@ -67,6 +70,7 @@ let answersDisabled = false;
 
 totalQuestionsSpan.textContent = quizQuestions.length;
 maxScoreSpan.textContent = quizQuestions.length;
+
 // event listeners
 startButton.addEventListener("click", startQuiz);
 
@@ -99,12 +103,13 @@ function showQuestion() {
     button.classList.add("answer-btn");
 
     // what is dataset? it's a property of the button element that allows you to store custom data
-    // store explicit string for dataset to avoid type surprises
-    button.dataset.correct = answer.correct ? 'true' : 'false';
+    button.dataset.correct = answer.correct;
     button.addEventListener("click", selectAnswer);
     answersContainer.appendChild(button);
   });
 }
+
+
 function selectAnswer(event) {
   // optimization check
   if (answersDisabled) return;
@@ -137,6 +142,7 @@ function selectAnswer(event) {
   }, 1000);
 }
 
+
 function showResults() {
   quizScreen.classList.remove("active");
   resultScreen.classList.add("active");
@@ -157,6 +163,7 @@ function showResults() {
     resultMessage.textContent = "Keep studying! You'll get better!";
   }
 }
+
 restartButton.addEventListener("click", restartQuiz);
 
 function restartQuiz() {
